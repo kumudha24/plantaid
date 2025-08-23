@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview",
-  "start": "node server.js"
+  "start": "node index.js",
+  "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
