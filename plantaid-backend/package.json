@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "build": "vite build",
-  "start": "vite preview --port $PORT"
+  "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "serve -s build",
+  "build": "react-scripts build",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
