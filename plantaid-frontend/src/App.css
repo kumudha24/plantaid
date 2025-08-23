@@ -50,6 +50,46 @@ nav a:hover {
   border: 2px solid #c8e6c8;
 }
 
+/* Search Bar Styling */
+.search-container {
+  margin: 20px 0 30px 0;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  border: 2px solid #c8e6c8;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #ffffff 0%, #fafefa 100%);
+  transition: all 0.3s ease;
+  font-family: inherit;
+  text-align: center;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a7c59;
+  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+  background: #ffffff;
+  transform: scale(1.02);
+}
+
+.search-results {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.search-results h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2d4a2d;
+}
+
 /* Blog Container Specific Styling */
 .blog-container {
   background: linear-gradient(145deg, #f9fdf9 0%, #f0f8f0 100%);
@@ -67,6 +107,12 @@ form {
 
 form div {
   margin-bottom: 20px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
 
 input[type="text"],
@@ -110,7 +156,7 @@ input[type="file"]:hover {
   background: #ffffff;
 }
 
-/* Button Styling */
+/* Primary Button Styling (Update Blog & Submit buttons) */
 button {
   background: linear-gradient(135deg, #4a7c59 0%, #5d8a6b 100%);
   color: white;
@@ -141,6 +187,159 @@ button:disabled {
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+/* Cancel Button - Same as Update Blog button */
+.cancel-btn {
+  background: linear-gradient(135deg, #4a7c59 0%, #5d8a6b 100%);
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #3d6b4a 0%, #4a7c59 100%);
+}
+
+/* Action Buttons for Blog Posts */
+.blog-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e8f5e8;
+  align-items: center;
+}
+
+/* Edit & Delete Buttons - Darker green shade */
+.edit-btn, .delete-btn {
+  background: linear-gradient(135deg, #2d5f3f 0%, #3d6b4a 100%);
+  font-size: 14px;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(45, 95, 63, 0.2);
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  background: linear-gradient(135deg, #1f4c2e 0%, #2d5f3f 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 95, 63, 0.3);
+}
+
+.edit-btn:disabled, .delete-btn:disabled {
+  background: #a8c8a8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Like/Dislike Buttons - Medium green shade */
+.like-dislike-container {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  align-items: center;
+}
+
+.like-btn, .dislike-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  min-width: 60px;
+  justify-content: center;
+  background: linear-gradient(135deg, #6b7c4a 0%, #7d8a5d 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(107, 124, 74, 0.3);
+}
+
+.like-btn:hover, .dislike-btn:hover {
+  background: linear-gradient(135deg, #5a6b3d 0%, #6b7c4a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 124, 74, 0.4);
+}
+
+.like-btn:disabled, .dislike-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* User interaction states */
+.like-btn.user-liked {
+  background: linear-gradient(135deg, #4a5f2d 0%, #5a6b3d 100%);
+  box-shadow: 0 2px 8px rgba(74, 95, 45, 0.4);
+  opacity: 0.8;
+}
+
+.dislike-btn.user-disliked {
+  background: linear-gradient(135deg, #4a5f2d 0%, #5a6b3d 100%);
+  box-shadow: 0 2px 8px rgba(74, 95, 45, 0.4);
+  opacity: 0.8;
+}
+
+/* Featured Blog Styling */
+.featured-blogs-container {
+  margin: 20px 0;
+}
+
+.featured-blog {
+  position: relative;
+  margin: 20px 0;
+}
+
+.featured-blog .blog-post {
+  border: 3px solid #FFD700;
+  background: linear-gradient(145deg, #FFFEF7 0%, #FFF9E6 100%);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+}
+
+.featured-badge {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  font-size: 14px;
+}
+
+.featured-badge span {
+  display: block;
+}
+
+.tie-message {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 2px solid #FF8E53;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+  animation: celebrationPulse 2s ease-in-out infinite;
+}
+
+@keyframes celebrationPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+  }
 }
 
 /* Headings */
@@ -214,6 +413,44 @@ h3 {
   border-top: 1px solid #e8f5e8;
 }
 
+/* Loading States */
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* No Results Message */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b8e6b;
+  font-style: italic;
+  background: linear-gradient(145deg, #f9fdf9 0%, #f0f8f0 100%);
+  border-radius: 12px;
+  border: 2px dashed #d4edd4;
+  margin: 20px 0;
+}
+
+/* Search Results Count */
+.results-count {
+  text-align: center;
+  color: #6b8e6b;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
 /* HR Styling */
 hr {
   border: none;
@@ -237,6 +474,27 @@ center {
   text-align: center;
 }
 
+/* Success/Error Messages */
+.success-message {
+  background: linear-gradient(145deg, #d4f4dd 0%, #c3f0cc 100%);
+  color: #2d4a2d;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border: 2px solid #a8d8b3;
+  text-align: center;
+}
+
+.error-message {
+  background: linear-gradient(145deg, #f4d4d4 0%, #f0c3c3 100%);
+  color: #4a2d2d;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border: 2px solid #d8a8a8;
+  text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
@@ -250,10 +508,10 @@ center {
   
   nav {
     padding: 10px 15px;
+    gap: 15px;
   }
   
   nav a {
-    margin-right: 15px;
     padding: 8px 12px;
     font-size: 14px;
   }
@@ -265,13 +523,43 @@ center {
   h2 {
     font-size: 1.5em;
   }
+  
+  .blog-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .edit-btn, .delete-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-buttons button {
+    width: 100%;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
 }
 
 @media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
   nav a {
     display: block;
-    margin: 5px 0;
     text-align: center;
+    width: 100%;
   }
   
   .container {
@@ -282,23 +570,19 @@ center {
   .blog-container {
     padding: 15px;
   }
-}
+  
+  .search-input {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
 
-/* Animation for loading states */
-@keyframes pulse {
-  0% {
-    opacity: 1;
+  h1 {
+    font-size: 1.6em;
   }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 
-.loading {
-  animation: pulse 1.5s ease-in-out infinite;
+  h2 {
+    font-size: 1.3em;
+  }
 }
 
 /* Scrollbar Styling */
@@ -317,4 +601,38 @@ center {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #4a7c59;
+}
+
+/* Animation for new posts */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-post.new-post {
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #4a7c59;
+  outline-offset: 2px;
+}
+
+/* Hover effects for interactive elements */
+.blog-post:hover .blog-actions {
+  opacity: 1;
+}
+
+.blog-actions {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
 }
