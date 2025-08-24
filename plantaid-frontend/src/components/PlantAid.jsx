@@ -28,8 +28,8 @@ function PlantAid() {
 
   const matildaCardStyle = {
     position: 'relative',
-    width: '30%',
-    minWidth: '250px',
+    width: '35%',
+    minWidth: '280px',
     height: '700px',
     borderRadius: '15px',
     overflow: 'hidden',
@@ -38,7 +38,7 @@ function PlantAid() {
   };
 
   const rightSectionStyle = {
-    width: '70%',
+    width: '65%',
     flex: '1',
     display: 'flex',
     flexDirection: 'column',
@@ -83,7 +83,7 @@ function PlantAid() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
       <div style={containerStyle}>
-        {/* Left Card - Matilda */}
+        {/* Left Section - Matilda */}
         <div style={matildaCardStyle}>
           <model-viewer
             src="matilda.glb"
@@ -91,7 +91,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 85deg 200m"
+            camera-orbit="0deg 90deg 250m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
