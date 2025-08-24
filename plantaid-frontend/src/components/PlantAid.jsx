@@ -88,7 +88,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 60m"
+            camera-orbit="0deg 90deg 90m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
@@ -115,7 +115,7 @@ function PlantAid() {
               auto-rotate="true"
               auto-rotate-delay="1000"
               rotation-per-second="30deg"
-              camera-orbit="0deg 90deg 45m"
+              camera-orbit="0deg 90deg 60m"
               shadow-intensity="1"
               shadow-softness="0.5"
               style={modelViewerStyle}
