@@ -30,7 +30,7 @@ function PlantAid() {
     position: 'relative',
     width: '35%',
     minWidth: '250px',
-    height: '500px',
+    height: '580px',
     borderRadius: '12px',
     overflow: 'hidden',
     boxShadow: '0 6px 20px rgba(74, 124, 89, 0.12)',
@@ -47,7 +47,7 @@ function PlantAid() {
 
   const plantAidCardStyle = {
     position: 'relative',
-    height: '140px',
+    height: '160px',
     borderRadius: '12px',
     overflow: 'hidden',
     display: 'flex',
@@ -60,7 +60,7 @@ function PlantAid() {
 
   const pottedCardStyle = {
     position: 'relative',
-    height: '345px',
+    height: '405px',
     borderRadius: '12px',
     overflow: 'hidden',
     boxShadow: '0 6px 20px rgba(74, 124, 89, 0.12)',
@@ -91,7 +91,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 380m"
+            camera-orbit="0deg 90deg 370m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
@@ -118,7 +118,7 @@ function PlantAid() {
               auto-rotate="true"
               auto-rotate-delay="1000"
               rotation-per-second="30deg"
-              camera-orbit="0deg 90deg 40m"
+              camera-orbit="0deg 90deg 50m"
               shadow-intensity="1"
               shadow-softness="0.5"
               style={modelViewerStyle}
