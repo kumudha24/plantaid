@@ -18,17 +18,19 @@ function PlantAid() {
 
   const containerStyle = {
     display: 'flex',
-    gap: '30px',
+    gap: '20px',
     width: '100%',
-    maxWidth: '1200px',
-    margin: '30px auto',
-    padding: '0 20px'
+    maxWidth: '100vw',
+    margin: '20px auto',
+    padding: '0 20px',
+    boxSizing: 'border-box'
   };
 
   const matildaCardStyle = {
     position: 'relative',
-    width: '25%',
-    height: '830px', // Combined height of both right cards plus gap
+    width: '30%',
+    minWidth: '250px',
+    height: '700px',
     borderRadius: '15px',
     overflow: 'hidden',
     boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
@@ -36,10 +38,11 @@ function PlantAid() {
   };
 
   const rightSectionStyle = {
-    width: '75%',
+    width: '70%',
+    flex: '1',
     display: 'flex',
     flexDirection: 'column',
-    gap: '30px'
+    gap: '20px'
   };
 
   const plantAidCardStyle = {
@@ -57,7 +60,7 @@ function PlantAid() {
 
   const pottedCardStyle = {
     position: 'relative',
-    height: '600px',
+    height: '480px',
     borderRadius: '15px',
     overflow: 'hidden',
     boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
@@ -80,7 +83,7 @@ function PlantAid() {
   return (
     <div style={{ padding: '20px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
       <div style={containerStyle}>
-        {/* Left Card - Matilda with combined height */}
+        {/* Left Card - Matilda */}
         <div style={matildaCardStyle}>
           <model-viewer
             src="matilda.glb"
@@ -88,7 +91,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 200m"
+            camera-orbit="0deg 85deg 200m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
