@@ -261,9 +261,6 @@ export default function BlogForm() {
           {!editingBlogId && (
             <div>
               <input type="file" accept="image/*" onChange={handleFileChange} />
-              <small style={{display: 'block', marginTop: '5px', color: '#666'}}>
-                Max file size: 5MB. Supported formats: JPG, PNG, GIF, WebP
-              </small>
             </div>
           )}
 
