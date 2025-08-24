@@ -34,7 +34,7 @@ function PlantAid() {
     borderRadius: '15px',
     overflow: 'hidden',
     boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
-    border: '2px solid #c8e6c8'
+    background: 'linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%)'
   };
 
   const rightSectionStyle = {
@@ -91,7 +91,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 360m"
+            camera-orbit="0deg 90deg 370m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
