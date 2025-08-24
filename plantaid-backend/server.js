@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb+srv://kumudhashree2004:GSyVcB1COrJ2Cc7t@cluster0.fcprpwp.mongodb.net/plantaiddb?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
