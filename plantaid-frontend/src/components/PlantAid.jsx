@@ -18,22 +18,22 @@ function PlantAid() {
 
   const containerStyle = {
     display: 'flex',
-    gap: '20px',
+    gap: '15px',
     width: '100%',
-    maxWidth: '100vw',
-    margin: '20px auto',
-    padding: '0 20px',
+    maxWidth: '1200px',
+    margin: '10px auto',
+    padding: '0 15px',
     boxSizing: 'border-box'
   };
 
   const matildaCardStyle = {
     position: 'relative',
     width: '35%',
-    minWidth: '280px',
-    height: '700px',
-    borderRadius: '15px',
+    minWidth: '250px',
+    height: '500px',
+    borderRadius: '12px',
     overflow: 'hidden',
-    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
+    boxShadow: '0 6px 20px rgba(74, 124, 89, 0.12)',
     background: 'linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%)'
   };
 
@@ -42,28 +42,28 @@ function PlantAid() {
     flex: '1',
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px'
+    gap: '15px'
   };
 
   const plantAidCardStyle = {
     position: 'relative',
-    height: '200px',
-    borderRadius: '15px',
+    height: '140px',
+    borderRadius: '12px',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
+    boxShadow: '0 6px 20px rgba(74, 124, 89, 0.12)',
     border: '2px solid #c8e6c8',
     backgroundColor: '#f8fdf8'
   };
 
   const pottedCardStyle = {
     position: 'relative',
-    height: '480px',
-    borderRadius: '15px',
+    height: '345px',
+    borderRadius: '12px',
     overflow: 'hidden',
-    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
+    boxShadow: '0 6px 20px rgba(74, 124, 89, 0.12)',
     border: '2px solid #c8e6c8'
   };
 
@@ -75,13 +75,13 @@ function PlantAid() {
 
   const plantAidTextStyle = {
     color: '#4a7c59',
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     fontWeight: 'bold',
     textAlign: 'center'
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
+    <div style={{ padding: '15px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
       <div style={containerStyle}>
         {/* Left Section - Matilda */}
         <div style={matildaCardStyle}>
@@ -91,7 +91,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 380m"
+            camera-orbit="0deg 90deg 430m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
@@ -104,7 +104,7 @@ function PlantAid() {
           <div style={plantAidCardStyle}>
             <div style={plantAidTextStyle}>
               🌿 PlantAid 🌿<br/>
-              <span style={{ fontSize: '1.2rem', fontWeight: 'normal', color: '#6b8e6b' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#6b8e6b' }}>
                 Welcome to the PlantAid community platform!
               </span>
             </div>
@@ -118,7 +118,7 @@ function PlantAid() {
               auto-rotate="true"
               auto-rotate-delay="1000"
               rotation-per-second="30deg"
-              camera-orbit="0deg 90deg 60m"
+              camera-orbit="0deg 90deg 80m"
               shadow-intensity="1"
               shadow-softness="0.5"
               style={modelViewerStyle}
