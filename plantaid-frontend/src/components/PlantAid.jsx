@@ -18,33 +18,30 @@ function PlantAid() {
 
   const containerStyle = {
     display: 'flex',
-    gap: '30px',
+    gap: '20px',
     width: '100%',
-    maxWidth: '1200px',
-    margin: '30px auto',
+    maxWidth: '1000px',
+    margin: '20px auto',
     padding: '0 20px'
   };
 
   const matildaCardStyle = {
     position: 'relative',
     width: '25%',
-    height: '830px', // Combined height of both right cards plus gap
-    borderRadius: '15px',
+    height: '650px', // Reduced height for better screen fit
     overflow: 'hidden',
-    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
-    border: '2px solid #c8e6c8'
   };
 
   const rightSectionStyle = {
     width: '75%',
     display: 'flex',
     flexDirection: 'column',
-    gap: '30px'
+    gap: '20px'
   };
 
   const plantAidCardStyle = {
     position: 'relative',
-    height: '200px',
+    height: '150px',
     borderRadius: '15px',
     overflow: 'hidden',
     display: 'flex',
@@ -57,7 +54,7 @@ function PlantAid() {
 
   const pottedCardStyle = {
     position: 'relative',
-    height: '600px',
+    height: '480px',
     borderRadius: '15px',
     overflow: 'hidden',
     boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
@@ -72,7 +69,7 @@ function PlantAid() {
 
   const plantAidTextStyle = {
     color: '#4a7c59',
-    fontSize: '2.5rem',
+    fontSize: '2rem',
     fontWeight: 'bold',
     textAlign: 'center'
   };
@@ -88,7 +85,7 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 60m"
+            camera-orbit="0deg 90deg 80m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
@@ -101,7 +98,7 @@ function PlantAid() {
           <div style={plantAidCardStyle}>
             <div style={plantAidTextStyle}>
               🌿 PlantAid 🌿<br/>
-              <span style={{ fontSize: '1.2rem', fontWeight: 'normal', color: '#6b8e6b' }}>
+              <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#6b8e6b' }}>
                 Welcome to the PlantAid community platform!
               </span>
             </div>
@@ -115,7 +112,7 @@ function PlantAid() {
               auto-rotate="true"
               auto-rotate-delay="1000"
               rotation-per-second="30deg"
-              camera-orbit="0deg 90deg 45m"
+              camera-orbit="0deg 90deg 65m"
               shadow-intensity="1"
               shadow-softness="0.5"
               style={modelViewerStyle}
