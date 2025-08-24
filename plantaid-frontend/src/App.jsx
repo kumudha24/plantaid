@@ -6,6 +6,7 @@ import PlantAid from './components/PlantAid';
 import axios from 'axios';
 
 const BACKEND_URL = 'https://plantaid-backend.onrender.com';
+
 //Home component with search functionality and recent posts
 function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -149,45 +150,69 @@ function Home() {
     setHasSearched(false);
   };
 
-  // Updated function with showFullContent parameter
-  const renderBlogPost = (post, showLikeButtons = true, showFullContent = false) => (
-    <div key={post._id} className="blog-post">
-      {post.imagePath && (
-        <img src={`${BACKEND_URL}/${post.imagePath}`} alt={post.title} />
-      )}
-      <h3>{post.title}</h3>
-      {post.subtitle && <p><strong>{post.subtitle}</strong></p>}
-      <p>
-        {showFullContent 
-          ? post.content 
-          : (post.content.length > 150 ? `${post.content.substring(0, 150)}...` : post.content)
-        }
-      </p>
-      
-      {showLikeButtons && (
-        <div className="like-dislike-container">
-          <button 
-            className={`like-btn ${userInteractions[post._id] === 'liked' ? 'user-liked' : ''}`}
-            onClick={() => handleLike(post._id)}
-            disabled={userInteractions[post._id]}
-            title={userInteractions[post._id] ? 'You have already voted' : 'Like this post'}
-          >
-            👍 {post.likes || 0}
-          </button>
-          <button 
-            className={`dislike-btn ${userInteractions[post._id] === 'disliked' ? 'user-disliked' : ''}`}
-            onClick={() => handleDislike(post._id)}
-            disabled={userInteractions[post._id]}
-            title={userInteractions[post._id] ? 'You have already voted' : 'Dislike this post'}
-          >
-            👎 {post.dislikes || 0}
-          </button>
-        </div>
-      )}
-      
-      <small>{new Date(post.createdAt).toLocaleDateString()}</small>
-    </div>
-  );
+  // Function to get the correct image URL (supports both old and new format)
+  const getImageUrl = (post) => {
+    if (post.imageUrl) {
+      return post.imageUrl; // New Cloudinary URL
+    } else if (post.imagePath) {
+      return `${BACKEND_URL}/${post.imagePath}`; // Old local path (for backward compatibility)
+    }
+    return null;
+  };
+
+  // Updated function with showFullContent parameter and image fallback
+  const renderBlogPost = (post, showLikeButtons = true, showFullContent = false) => {
+    const imageUrl = getImageUrl(post);
+    
+    return (
+      <div key={post._id} className="blog-post">
+        {imageUrl && (
+          <img 
+            src={imageUrl} 
+            alt={post.title}
+            onError={(e) => {
+              console.log('Image failed to load:', imageUrl);
+              e.target.style.display = 'none'; // Hide broken images
+            }}
+            onLoad={() => {
+              console.log('Image loaded successfully:', imageUrl);
+            }}
+          />
+        )}
+        <h3>{post.title}</h3>
+        {post.subtitle && <p><strong>{post.subtitle}</strong></p>}
+        <p>
+          {showFullContent 
+            ? post.content 
+            : (post.content.length > 150 ? `${post.content.substring(0, 150)}...` : post.content)
+          }
+        </p>
+        
+        {showLikeButtons && (
+          <div className="like-dislike-container">
+            <button 
+              className={`like-btn ${userInteractions[post._id] === 'liked' ? 'user-liked' : ''}`}
+              onClick={() => handleLike(post._id)}
+              disabled={userInteractions[post._id]}
+              title={userInteractions[post._id] ? 'You have already voted' : 'Like this post'}
+            >
+              👍 {post.likes || 0}
+            </button>
+            <button 
+              className={`dislike-btn ${userInteractions[post._id] === 'disliked' ? 'user-disliked' : ''}`}
+              onClick={() => handleDislike(post._id)}
+              disabled={userInteractions[post._id]}
+              title={userInteractions[post._id] ? 'You have already voted' : 'Dislike this post'}
+            >
+              👎 {post.dislikes || 0}
+            </button>
+          </div>
+        )}
+        
+        <small>{new Date(post.createdAt).toLocaleDateString()}</small>
+      </div>
+    );
+  };
 
   return (
     <div className="container">

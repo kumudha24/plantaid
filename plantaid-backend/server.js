@@ -2,14 +2,20 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://kumudhashree2004:GSyVcB1COrJ2Cc7t@cluster0.fcprpwp.mongodb.net/plantaiddb?retryWrites=true&w=majority&appName=Cluster0', {
@@ -19,34 +25,41 @@ mongoose.connect('mongodb+srv://kumudhashree2004:GSyVcB1COrJ2Cc7t@cluster0.fcprp
 .then(() => console.log("✅ MongoDB connected"))
 .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Blog schema with timestamps and like/dislike functionality
+// Updated Blog schema - now supports both old imagePath and new imageUrl
 const blogSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  subtitle: { type: String, default: "" }, // Made optional with default empty string
+  subtitle: { type: String, default: "" },
   content: { type: String, required: true },
-  imagePath: String,
+  imagePath: String, // Keep for backward compatibility
+  imageUrl: String, // New field for Cloudinary URLs
+  cloudinaryPublicId: String, // Store for deletion
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 }
 }, {
-  timestamps: true // This adds createdAt and updatedAt automatically
+  timestamps: true
 });
 
 const Blog = mongoose.model("Blog", blogSchema);
 
-// Multer setup for image uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadsDir = "uploads/";
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
-    }
-    cb(null, uploadsDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+// Multer setup with Cloudinary storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'plantaid-blogs',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
+    transformation: [
+      { width: 800, height: 600, crop: 'limit' }, // Optimize image size
+      { quality: 'auto' }
+    ]
   },
 });
-const upload = multer({ storage });
+
+const upload = multer({ 
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  }
+});
 
 // ➡️ Create blog
 app.post("/blogs", upload.single("image"), async (req, res) => {
@@ -54,9 +67,10 @@ app.post("/blogs", upload.single("image"), async (req, res) => {
     console.log("Creating blog with data:", req.body);
     const blog = new Blog({
       title: req.body.title,
-      subtitle: req.body.subtitle || "", // Handle empty subtitle
+      subtitle: req.body.subtitle || "",
       content: req.body.content,
-      imagePath: req.file ? req.file.path : null,
+      imageUrl: req.file ? req.file.path : null, // Cloudinary URL
+      cloudinaryPublicId: req.file ? req.file.public_id : null,
       likes: 0,
       dislikes: 0
     });
@@ -65,7 +79,7 @@ app.post("/blogs", upload.single("image"), async (req, res) => {
     res.json(blog);
   } catch (err) {
     console.error("Error creating blog:", err);
-    res.status(500).json({ error: "Failed to create blog" });
+    res.status(500).json({ error: "Failed to create blog", details: err.message });
   }
 });
 
@@ -94,7 +108,6 @@ app.get("/blogs/recent", async (req, res) => {
 // ➡️ Get featured blogs (most liked)
 app.get("/blogs/featured", async (req, res) => {
   try {
-    // Find the maximum number of likes
     const maxLikesResult = await Blog.findOne().sort({ likes: -1 }).select('likes');
     
     if (!maxLikesResult || maxLikesResult.likes === 0) {
@@ -102,8 +115,6 @@ app.get("/blogs/featured", async (req, res) => {
     }
     
     const maxLikes = maxLikesResult.likes;
-    
-    // Find all blogs with the maximum likes
     const featuredBlogs = await Blog.find({ likes: maxLikes }).sort({ createdAt: -1 });
     
     res.json(featuredBlogs);
@@ -187,21 +198,23 @@ app.put("/blogs/:id", upload.single("image"), async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    // If new image uploaded, delete old image
+    // If new image uploaded, delete old image from Cloudinary
     if (req.file) {
-      if (blog.imagePath && fs.existsSync(blog.imagePath)) {
+      if (blog.cloudinaryPublicId) {
         try {
-          fs.unlinkSync(blog.imagePath);
-          console.log("Old image deleted:", blog.imagePath);
+          await cloudinary.uploader.destroy(blog.cloudinaryPublicId);
+          console.log("Old image deleted from Cloudinary:", blog.cloudinaryPublicId);
         } catch (err) {
-          console.warn("Could not delete old image:", err.message);
+          console.warn("Could not delete old image from Cloudinary:", err.message);
         }
       }
-      blog.imagePath = req.file.path;
+      blog.imageUrl = req.file.path;
+      blog.cloudinaryPublicId = req.file.public_id;
+      blog.imagePath = null; // Clear old imagePath
     }
 
     blog.title = req.body.title || blog.title;
-    blog.subtitle = req.body.subtitle !== undefined ? req.body.subtitle : blog.subtitle; // Handle empty string
+    blog.subtitle = req.body.subtitle !== undefined ? req.body.subtitle : blog.subtitle;
     blog.content = req.body.content || blog.content;
 
     await blog.save();
@@ -224,15 +237,13 @@ app.delete("/blogs/:id", async (req, res) => {
       return res.status(404).json({ error: "Blog not found" });
     }
 
-    // Try deleting image safely
-    if (blog.imagePath) {
+    // Delete image from Cloudinary if exists
+    if (blog.cloudinaryPublicId) {
       try {
-        if (fs.existsSync(blog.imagePath)) {
-          fs.unlinkSync(blog.imagePath);
-          console.log("Image deleted:", blog.imagePath);
-        }
+        await cloudinary.uploader.destroy(blog.cloudinaryPublicId);
+        console.log("Image deleted from Cloudinary:", blog.cloudinaryPublicId);
       } catch (err) {
-        console.warn("Could not delete image file:", err.message);
+        console.warn("Could not delete image from Cloudinary:", err.message);
       }
     }
 

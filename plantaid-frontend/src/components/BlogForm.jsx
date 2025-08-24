@@ -213,6 +213,16 @@ export default function BlogForm() {
     }
   };
 
+  // Function to get the correct image URL (supports both old and new format)
+  const getImageUrl = (blog) => {
+    if (blog.imageUrl) {
+      return blog.imageUrl; // New Cloudinary URL
+    } else if (blog.imagePath) {
+      return `${BACKEND_URL}/${blog.imagePath}`; // Old local path (for backward compatibility)
+    }
+    return null;
+  };
+
   return (
     <div className="container">
       <h1>🌱PlantAid - Create Post🌱</h1>
@@ -251,6 +261,9 @@ export default function BlogForm() {
           {!editingBlogId && (
             <div>
               <input type="file" accept="image/*" onChange={handleFileChange} />
+              <small style={{display: 'block', marginTop: '5px', color: '#666'}}>
+                Max file size: 5MB. Supported formats: JPG, PNG, GIF, WebP
+              </small>
             </div>
           )}
 
@@ -278,54 +291,68 @@ export default function BlogForm() {
       <h2>All Blogs</h2>
       <div>
         {blogs.length === 0 && <p>No blogs yet. Create your first blog post!</p>}
-        {blogs.map((b) => (
-          <div key={b._id} className="blog-post">
-            {b.imagePath && (
-              <img src={`${BACKEND_URL}/${b.imagePath}`} alt={b.title} />
-            )}
-            <h3>{b.title}</h3>
-            {b.subtitle && <p><strong>{b.subtitle}</strong></p>}
-            <p>{b.content}</p>
-            
-            <div className="like-dislike-container">
-              <button 
-                className={`like-btn ${userInteractions[b._id] === 'liked' ? 'user-liked' : ''}`}
-                onClick={() => handleLike(b._id)}
-                disabled={loading || userInteractions[b._id]}
-                title={userInteractions[b._id] ? 'You have already voted' : 'Like this post'}
-              >
-                👍 {b.likes || 0}
-              </button>
-              <button 
-                className={`dislike-btn ${userInteractions[b._id] === 'disliked' ? 'user-disliked' : ''}`}
-                onClick={() => handleDislike(b._id)}
-                disabled={loading || userInteractions[b._id]}
-                title={userInteractions[b._id] ? 'You have already voted' : 'Dislike this post'}
-              >
-                👎 {b.dislikes || 0}
-              </button>
+        {blogs.map((b) => {
+          const imageUrl = getImageUrl(b);
+          
+          return (
+            <div key={b._id} className="blog-post">
+              {imageUrl && (
+                <img 
+                  src={imageUrl} 
+                  alt={b.title}
+                  onError={(e) => {
+                    console.log('Image failed to load:', imageUrl);
+                    e.target.style.display = 'none'; // Hide broken images
+                  }}
+                  onLoad={() => {
+                    console.log('Image loaded successfully:', imageUrl);
+                  }}
+                />
+              )}
+              <h3>{b.title}</h3>
+              {b.subtitle && <p><strong>{b.subtitle}</strong></p>}
+              <p>{b.content}</p>
+              
+              <div className="like-dislike-container">
+                <button 
+                  className={`like-btn ${userInteractions[b._id] === 'liked' ? 'user-liked' : ''}`}
+                  onClick={() => handleLike(b._id)}
+                  disabled={loading || userInteractions[b._id]}
+                  title={userInteractions[b._id] ? 'You have already voted' : 'Like this post'}
+                >
+                  👍 {b.likes || 0}
+                </button>
+                <button 
+                  className={`dislike-btn ${userInteractions[b._id] === 'disliked' ? 'user-disliked' : ''}`}
+                  onClick={() => handleDislike(b._id)}
+                  disabled={loading || userInteractions[b._id]}
+                  title={userInteractions[b._id] ? 'You have already voted' : 'Dislike this post'}
+                >
+                  👎 {b.dislikes || 0}
+                </button>
+              </div>
+              
+              <small>{new Date(b.createdAt).toLocaleString()}</small>
+              
+              <div className="blog-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => handleEditClick(b)}
+                  disabled={loading}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteClick(b._id)}
+                  disabled={loading}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            
-            <small>{new Date(b.createdAt).toLocaleString()}</small>
-            
-            <div className="blog-actions">
-              <button
-                className="edit-btn"
-                onClick={() => handleEditClick(b)}
-                disabled={loading}
-              >
-                Edit
-              </button>
-              <button
-                className="delete-btn"
-                onClick={() => handleDeleteClick(b._id)}
-                disabled={loading}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
