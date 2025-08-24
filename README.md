@@ -14,6 +14,7 @@ To create a space where plant care knowledge is accessible, practical, and roote
 Whether you’re a beginner learning about common leaf spots or an expert tackling rare infections, PlantAid is your go-to hub for plant health solutions. 🌸🌱
 
 Credits:
+
 3D Model by [FacultyManBruce](https://sketchfab.com/FacultyManBruce) on Sketchfab — Licensed under [CC Attribution](https://creativecommons.org/licenses/by/4.0/).
 
 3D Model by [nicolekeane](https://sketchfab.com/nicolekeane) on Sketchfab — Licensed under [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/).
