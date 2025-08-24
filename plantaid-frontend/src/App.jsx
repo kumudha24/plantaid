@@ -149,14 +149,20 @@ function Home() {
     setHasSearched(false);
   };
 
-  const renderBlogPost = (post, showLikeButtons = true) => (
+  // Updated function with showFullContent parameter
+  const renderBlogPost = (post, showLikeButtons = true, showFullContent = false) => (
     <div key={post._id} className="blog-post">
       {post.imagePath && (
         <img src={`${BACKEND_URL}/${post.imagePath}`} alt={post.title} />
       )}
       <h3>{post.title}</h3>
       {post.subtitle && <p><strong>{post.subtitle}</strong></p>}
-      <p>{post.content.length > 150 ? `${post.content.substring(0, 150)}...` : post.content}</p>
+      <p>
+        {showFullContent 
+          ? post.content 
+          : (post.content.length > 150 ? `${post.content.substring(0, 150)}...` : post.content)
+        }
+      </p>
       
       {showLikeButtons && (
         <div className="like-dislike-container">
@@ -235,7 +241,7 @@ function Home() {
               <p>No posts found matching your search. Try different keywords!</p>
             ) : (
               <div>
-                {searchResults.map((post) => renderBlogPost(post))}
+                {searchResults.map((post) => renderBlogPost(post, true, true))}
               </div>
             )}
           </div>
