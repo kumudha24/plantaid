@@ -25,22 +25,43 @@ function PlantAid() {
     padding: '0 20px'
   };
 
-  const pottedCardStyle = {
+  const matildaCardStyle = {
     position: 'relative',
-    width: '75%',
-    height: '400px',
+    width: '25%',
+    height: '830px', // Combined height of both right cards plus gap
     borderRadius: '15px',
     overflow: 'hidden',
     boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
     border: '2px solid #c8e6c8'
   };
 
-  const matildaCardStyle = {
+  const rightSectionStyle = {
+    width: '75%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '30px'
+  };
+
+  const plantAidCardStyle = {
     position: 'relative',
-    width: '25%',
-    height: '400px',
+    height: '200px',
     borderRadius: '15px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
+    border: '2px solid #c8e6c8',
+    backgroundColor: '#f8fdf8'
+  };
+
+  const pottedCardStyle = {
+    position: 'relative',
+    height: '600px',
+    borderRadius: '15px',
+    overflow: 'hidden',
+    boxShadow: '0 8px 25px rgba(74, 124, 89, 0.15)',
+    border: '2px solid #c8e6c8'
   };
 
   const modelViewerStyle = {
@@ -49,32 +70,17 @@ function PlantAid() {
     background: 'linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%)'
   };
 
-  const headerStyle = {
-    textAlign: 'center',
-    marginBottom: '20px'
-  };
-
-  const titleStyle = {
-    fontSize: '2.5rem',
+  const plantAidTextStyle = {
     color: '#4a7c59',
-    margin: '20px 0 10px 0'
-  };
-
-  const subtitleStyle = {
-    fontSize: '1.2rem',
-    color: '#6b8e6b',
-    margin: '0'
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    textAlign: 'center'
   };
 
   return (
     <div style={{ padding: '20px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
-      <div style={headerStyle}>
-        <h1 style={titleStyle}>🌿 PlantAid 🌿</h1>
-        <p style={subtitleStyle}>Welcome to the PlantAid community platform!</p>
-      </div>
-      
       <div style={containerStyle}>
-        {/* Left Card - Matilda */}
+        {/* Left Card - Matilda with combined height */}
         <div style={matildaCardStyle}>
           <model-viewer
             src="matilda.glb"
@@ -82,26 +88,39 @@ function PlantAid() {
             auto-rotate="true"
             auto-rotate-delay="1000"
             rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 45m"
+            camera-orbit="0deg 90deg 60m"
             shadow-intensity="1"
             shadow-softness="0.5"
             style={modelViewerStyle}
           />
         </div>
 
-        {/* Right Card - Potted Plants */}
-        <div style={pottedCardStyle}>
-          <model-viewer
-            src="potted_house_plants.glb"
-            alt="3D Potted House Plants"
-            auto-rotate="true"
-            auto-rotate-delay="1000"
-            rotation-per-second="30deg"
-            camera-orbit="0deg 90deg 45m"
-            shadow-intensity="1"
-            shadow-softness="0.5"
-            style={modelViewerStyle}
-          />
+        {/* Right Section - PlantAid Card and Potted Plants stacked */}
+        <div style={rightSectionStyle}>
+          {/* PlantAid Card */}
+          <div style={plantAidCardStyle}>
+            <div style={plantAidTextStyle}>
+              🌿 PlantAid 🌿<br/>
+              <span style={{ fontSize: '1.2rem', fontWeight: 'normal', color: '#6b8e6b' }}>
+                Welcome to the PlantAid community platform!
+              </span>
+            </div>
+          </div>
+
+          {/* Potted Plants Card */}
+          <div style={pottedCardStyle}>
+            <model-viewer
+              src="potted_house_plants.glb"
+              alt="3D Potted House Plants"
+              auto-rotate="true"
+              auto-rotate-delay="1000"
+              rotation-per-second="30deg"
+              camera-orbit="0deg 90deg 45m"
+              shadow-intensity="1"
+              shadow-softness="0.5"
+              style={modelViewerStyle}
+            />
+          </div>
         </div>
       </div>
     </div>
