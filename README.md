@@ -12,3 +12,6 @@ Explain the methods they used to cure them
 To create a space where plant care knowledge is accessible, practical, and rooted in real success stories—so that together we can keep our plants healthy and thriving.
 
 Whether you’re a beginner learning about common leaf spots or an expert tackling rare infections, PlantAid is your go-to hub for plant health solutions. 🌸🌱
+
+Credits:
+3D Model by [FacultyManBruce](https://sketchfab.com/FacultyManBruce) on Sketchfab — Licensed under [CC Attribution](https://creativecommons.org/licenses/by/4.0/).
