@@ -297,20 +297,20 @@ button:disabled {
 }
 
 .featured-blog .blog-post {
-  border: 3px solid #FFD700;
-  background: linear-gradient(145deg, #FFFEF7 0%, #FFF9E6 100%);
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+  border: 3px solid #6b8e23;
+  background: linear-gradient(145deg, #f0f8f0 0%, #e8f5e8 100%);
+  box-shadow: 0 8px 25px rgba(107, 142, 35, 0.2);
 }
 
 .featured-badge {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
-  color: #333;
+  background: linear-gradient(135deg, #6b8e23 0%, #7ba428 100%);
+  color: #ffffff;
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(107, 142, 35, 0.3);
   font-size: 14px;
 }
 
@@ -319,26 +319,26 @@ button:disabled {
 }
 
 .tie-message {
-  background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
-  color: #333;
+  background: linear-gradient(135deg, #5d8a6b 0%, #6b8e7a 100%);
+  color: #ffffff;
   padding: 12px 20px;
   border-radius: 12px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-  border: 2px solid #FF8E53;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+  border: 2px solid #4a7c59;
+  box-shadow: 0 4px 15px rgba(93, 138, 107, 0.2);
   animation: celebrationPulse 2s ease-in-out infinite;
 }
 
 @keyframes celebrationPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+    box-shadow: 0 4px 15px rgba(93, 138, 107, 0.2);
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+    box-shadow: 0 6px 20px rgba(93, 138, 107, 0.3);
   }
 }
 
@@ -474,7 +474,7 @@ center {
   text-align: center;
 }
 
-/* Success/Error Messages */
+/* Success/Error Messages - Both converted to green themes */
 .success-message {
   background: linear-gradient(145deg, #d4f4dd 0%, #c3f0cc 100%);
   color: #2d4a2d;
@@ -485,13 +485,14 @@ center {
   text-align: center;
 }
 
+/* Error message changed to darker green instead of red */
 .error-message {
-  background: linear-gradient(145deg, #f4d4d4 0%, #f0c3c3 100%);
-  color: #4a2d2d;
+  background: linear-gradient(145deg, #b8d4bb 0%, #a8c8ab 100%);
+  color: #2d4a2d;
   padding: 12px 20px;
   border-radius: 8px;
   margin: 15px 0;
-  border: 2px solid #d8a8a8;
+  border: 2px solid #8eb092;
   text-align: center;
 }
 
