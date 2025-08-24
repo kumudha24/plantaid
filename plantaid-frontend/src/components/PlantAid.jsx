@@ -18,11 +18,11 @@ function PlantAid() {
 
   const containerStyle = {
     display: 'flex',
-    gap: '15px',
+    gap: '8px',
     width: '100%',
     maxWidth: '1200px',
-    margin: '10px auto',
-    padding: '0 15px',
+    margin: '5px auto',
+    padding: '0 5px',
     boxSizing: 'border-box'
   };
 
@@ -42,7 +42,7 @@ function PlantAid() {
     flex: '1',
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px'
+    gap: '8px'
   };
 
   const plantAidCardStyle = {
@@ -81,7 +81,7 @@ function PlantAid() {
   };
 
   return (
-    <div style={{ padding: '15px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
+    <div style={{ padding: '5px', backgroundColor: '#f8fdf8', minHeight: '100vh' }}>
       <div style={containerStyle}>
         {/* Left Section - Matilda */}
         <div style={matildaCardStyle}>
