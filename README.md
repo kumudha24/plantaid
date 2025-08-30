@@ -1,4 +1,4 @@
-<img width="1919" height="1126" alt="2" src="https://github.com/user-attachments/assets/271d6b52-086d-4930-b652-916563976d74" />🌿 PlantAid
+🌿 PlantAid 🌿
 
 PlantAid is a friendly online community dedicated to helping plant lovers identify, treat, and prevent plant diseases through real-life experiences.
 
