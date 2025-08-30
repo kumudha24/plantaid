@@ -20,3 +20,6 @@ Credits:
 3D Model by [nicolekeane](https://sketchfab.com/nicolekeane) on Sketchfab — Licensed under [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Visit 🌱PlantAid🌱- https://plantaid-v37v.onrender.com/
+
+<img width="1919" height="1123" alt="1" src="https://github.com/user-attachments/assets/6dfe3f85-8d32-48bc-8fb2-b1139cbc3864" />
+
