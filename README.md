@@ -19,7 +19,7 @@ Credits:
 
 3D Model by [nicolekeane](https://sketchfab.com/nicolekeane) on Sketchfab — Licensed under [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-Visit 🌱PlantAid🌱- https://plantaid-v37v.onrender.com/
+[![Visit 🌱PlantAid🌱](https://img.shields.io/badge/Visit%20🌱PlantAid🌱-90EE90?style=for-the-badge)](https://plantaid-v37v.onrender.com/)
 
 <img width="1919" height="1123" alt="1" src="https://github.com/user-attachments/assets/6dfe3f85-8d32-48bc-8fb2-b1139cbc3864" />
 <img width="1919" height="1126" alt="2" src="https://github.com/user-attachments/assets/449db2b5-6b3d-4396-800d-c72b8d1826a3" />
